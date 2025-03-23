@@ -2,7 +2,7 @@
 { config, lib, pkgs, inputs, ... }:
 
 let
-  dotfiles = "/home/shared/nix/users/sebastian//dotfiles/";
+  dotfiles = "/home/shared/nix/users/sebastian/dotfiles/";
   mkSymlink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   symlinkFiles = {
     ".zshrc" = ".zshrc";
@@ -15,12 +15,13 @@ let
   }) (builtins.attrNames symlinkFiles));
 in
 {
-  home.username = "william";
-  home.homeDirectory = "/home/william";
+  home.username = "jos";
+  home.homeDirectory = "/home/jos";
   home.stateVersion = "24.11";
   home.file = homeFileConfig;
-
   home.packages = with pkgs; [
+
+
 
   ];
 }

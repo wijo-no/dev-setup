@@ -22,7 +22,18 @@
     gcc
     xclip
     wl-clipboard
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-vi-mode
   ];
+
+programs.starship = {
+  enable = true;
+};
+
+programs.zoxide = {
+  enable = true;
+
 
   programs.zsh = {
     enable = true;
