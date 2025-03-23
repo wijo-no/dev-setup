@@ -6,6 +6,7 @@ let
   mkSymlink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   symlinkFiles = {
     ".zshrc" = "zshConfig/.zshrc";
+	"./config/zshConfig" = "zshConfig/" 
     ".config/nvim" = "nvim";
   };
   homeFileConfig = builtins.listToAttrs (map (name: {
