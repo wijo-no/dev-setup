@@ -8,14 +8,14 @@ CURRENT_USER=$(whoami)
 
 echo "[INFO] Starter dev-setup installasjon for bruker: $CURRENT_USER"
 
-# 1. Prøv å finne nix-kommandoen
 if ! command -v nix >/dev/null 2>&1; then
-  # 2. Hvis ikke i $PATH, prøv å source global miljøfil
-  if [ -f /etc/profile.d/nix.sh ]; then
-    echo "[INFO] Laster multi-user Nix-miljø fra /etc/profile.d/nix.sh"
-    . /etc/profile.d/nix.sh
-  fi
+  echo "[INFO] Nix ikke funnet – installerer (multi-user)..."
+  bash <(curl -L https://nixos.org/nix/install) --daemon
+  . /etc/profile.d/nix.sh
+else
+  echo "[OK] Nix er allerede installert"
 fi
+
 
 # 3. Test igjen
 if ! command -v nix >/dev/null 2>&1; then
@@ -25,6 +25,19 @@ if ! command -v nix >/dev/null 2>&1; then
 else
   echo "[OK] Nix er tilgjengelig – fortsetter"
 fi
+
+if [ -f /etc/nix/nix.conf ]; then
+  if ! grep -q "experimental-features.*flakes" /etc/nix/nix.conf; then
+    echo "[INFO] Legger til 'experimental-features = nix-command flakes' i /etc/nix/nix.conf"
+    echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf >/dev/null
+  else
+    echo "[OK] 'experimental-features' er allerede satt"
+  fi
+else
+  echo "[INFO] Oppretter /etc/nix/nix.conf med experimental-features"
+  echo "experimental-features = nix-command flakes" | sudo tee /etc/nix/nix.conf >/dev/null
+fi
+
 
 
 # 2. Opprett felles katalog hvis den ikke finnes
