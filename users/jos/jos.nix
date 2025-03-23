@@ -5,7 +5,7 @@ let
   dotfiles = "/home/shared/nix/users/jos/dotfiles/";
   mkSymlink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   symlinkFiles = {
-	".config/zshConfig" = "zshConfig" 
+	".config/zshConfig" = "zshConfig" ;
     ".zshrc" = "zshConfig/.zshrc";
     ".config/nvim" = "nvim";
   };
