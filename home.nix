@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+		eza
     neovim
     git
     zsh
