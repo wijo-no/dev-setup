@@ -8,6 +8,15 @@ CURRENT_USER=$(whoami)
 
 echo "[INFO] Starter dev-setup installasjon for bruker: $CURRENT_USER"
 
+
+# ❗ ADVARSEL: Fjern /home/shared hvis den finnes – brukes for reinstallering
+if [ -d "/home/shared" ]; then
+  echo "[ADVARSEL] /home/shared eksisterer – sletter hele mappen!"
+  sudo rm -rf /home/shared
+fi
+
+
+
 # 1. Sjekk om gruppe finnes, lag hvis den mangler
 if ! getent group nixusers >/dev/null; then
   echo "[INFO] Oppretter gruppe 'nixusers'"
