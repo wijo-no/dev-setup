@@ -27,12 +27,6 @@
     zsh-vi-mode
   ];
 
-programs.starship = {
-  enable = true;
-};
-
-programs.zoxide = {
-  enable = true;
 
 
   programs.zsh = {
