@@ -56,6 +56,19 @@ else
   echo "[OK] Repo finnes allerede i $TARGET_DIR"
 fi
 
+# Sørg for at brukeren har eierskap til repoet
+if [ -d "$TARGET_DIR/.git" ]; then
+  echo "[INFO] Sjekker eierskap på $TARGET_DIR"
+  OWNER=$(stat -c '%U' "$TARGET_DIR")
+
+  if [ "$OWNER" != "$CURRENT_USER" ]; then
+    echo "[INFO] Endrer eierskap av $TARGET_DIR til $CURRENT_USER"
+    sudo chown -R "$CURRENT_USER:$CURRENT_USER" "$TARGET_DIR"
+  fi
+fi
+
+
+
 # 4. Kjør Home Manager-konfig for gjeldende bruker
 echo "[INFO] Kjører Home Manager for $FLAKE_ENTRY"
 nix run github:nix-community/home-manager -- switch --flake "$TARGET_DIR#$FLAKE_ENTRY"
