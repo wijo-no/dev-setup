@@ -91,7 +91,7 @@ source ~/.config/zshConfig/functions.sh
 source ~/.config/zshConfig/exports.sh
 source ~/.config/.secrets.sh
 source ~/.config/zshConfig/aliases.sh
-source ~/.config/zshConfig/theme.zsh
+source ~/.config/zshConfig/themeRemote.zsh
 
 
 # Enable extended globbing and better autocompletion
