@@ -8,11 +8,11 @@
     wget
     curl
     htop
+    lazygit
     tree
     fzf
     ripgrep
     bat
-    tmux
     fd
     starship
     zoxide
