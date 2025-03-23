@@ -5,9 +5,8 @@ let
   dotfiles = "/home/shared/nix/users/jos/dotfiles/";
   mkSymlink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   symlinkFiles = {
-    ".zshrc" = ".zshrc";
+    ".zshrc" = "zshConfig/.zshrc";
     ".config/nvim" = "nvim";
-    ".config/kitty" = "kitty";
   };
   homeFileConfig = builtins.listToAttrs (map (name: {
     name = name;
