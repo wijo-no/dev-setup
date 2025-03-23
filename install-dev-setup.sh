@@ -8,14 +8,24 @@ CURRENT_USER=$(whoami)
 
 echo "[INFO] Starter dev-setup installasjon for bruker: $CURRENT_USER"
 
-# 1. Installer Nix hvis det ikke finnes
+# 1. Prøv å finne nix-kommandoen
 if ! command -v nix >/dev/null 2>&1; then
-  echo "[INFO] Nix ikke funnet – installerer..."
-  curl -L https://nixos.org/nix/install | sh
-  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-else
-  echo "[OK] Nix er allerede installert"
+  # 2. Hvis ikke i $PATH, prøv å source global miljøfil
+  if [ -f /etc/profile.d/nix.sh ]; then
+    echo "[INFO] Laster multi-user Nix-miljø fra /etc/profile.d/nix.sh"
+    . /etc/profile.d/nix.sh
+  fi
 fi
+
+# 3. Test igjen
+if ! command -v nix >/dev/null 2>&1; then
+  echo "[ERROR] Nix ikke funnet – men multi-user Nix ser ut til å være installert."
+  echo "Avbryter for å unngå feilinstallasjon."
+  exit 1
+else
+  echo "[OK] Nix er tilgjengelig – fortsetter"
+fi
+
 
 # 2. Opprett felles katalog hvis den ikke finnes
 if [ ! -d "$TARGET_DIR" ]; then
