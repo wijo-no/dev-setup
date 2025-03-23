@@ -2,7 +2,7 @@
 { config, lib, pkgs, inputs, ... }:
 
 let
-  dotfiles = "/home/shared/nix/users/sebastian/dotfiles/";
+  dotfiles = "/home/shared/nix/users/jos/dotfiles/";
   mkSymlink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   symlinkFiles = {
     ".zshrc" = ".zshrc";
