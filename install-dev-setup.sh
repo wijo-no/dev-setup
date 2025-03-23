@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_URL="git@github.com:wijo-no/dev-setup.git"
+REPO_URL="https://github.com/wijo-no/dev-setup.git"
 TARGET_DIR="/home/shared/nix"
 FLAKE_ENTRY="$(whoami)@ubuntu"
 CURRENT_USER=$(whoami)
